@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Linda's Symphony Roadmap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+body{margin:0}
+/* Layout: one reading column, a "score" of three movements for the 90 days, a ladder for the ecosystem, two side-by-side offers */
+:root{
+  --bg:#F2F3ED; --surface:#FFFFFF; --ink:#1E2924; --muted:#5B6862; --line:#D8DDD2;
+  --beet:#8E2C4A; --beet-soft:#F4E3E8; --sage:#5F7E5C; --sage-soft:#E3EBDF;
+  --display:"Gloock", Georgia, "Times New Roman", serif;
+  --body:"Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#131916; --surface:#1B2320; --ink:#E7EBE3; --muted:#A3AFA8; --line:#2F3A35;
+  --beet:#E58AA4; --beet-soft:#3A2028; --sage:#9DBC98; --sage-soft:#22301F; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#131916; --surface:#1B2320; --ink:#E7EBE3; --muted:#A3AFA8; --line:#2F3A35;
+  --beet:#E58AA4; --beet-soft:#3A2028; --sage:#9DBC98; --sage-soft:#22301F; color-scheme:dark }
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.65}
+.wrap{max-width:860px;margin:0 auto;padding-inline:20px;padding-block:48px 80px}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:clamp(2.3rem,6vw,3.6rem)}
+h2{font-size:clamp(1.7rem,4vw,2.3rem)}
+h3{font-size:1.3rem}
+p{margin:0;max-width:65ch}
+.eyebrow{font-family:var(--mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--beet)}
+section{display:grid;gap:20px;padding-block:44px;border-top:1px solid var(--line)}
+section:first-of-type{border-top:0}
+.lede{font-size:1.15rem;color:var(--muted)}
+.stack{display:grid;gap:14px}
+strong{font-weight:600}
+
+/* hero */
+.hero{display:grid;gap:18px;padding-block:8px 36px}
+.meta{display:flex;flex-wrap:wrap;gap:8px 18px;font-family:var(--mono);font-size:.8rem;color:var(--muted)}
+
+/* quotes */
+.quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.quote{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:18px 20px;display:grid;gap:8px;min-width:0}
+.quote q{font-family:var(--display);font-size:1.15rem;line-height:1.35;quotes:"“" "”"}
+.quote span{font-size:.92rem;color:var(--muted)}
+
+/* call summary */
+.facts{display:grid;gap:0;margin:0;border-top:1px solid var(--line)}
+.facts > div{display:grid;grid-template-columns:150px 1fr;gap:18px;padding-block:14px;border-bottom:1px solid var(--line)}
+.facts dt{font-family:var(--mono);font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;color:var(--beet);padding-top:4px}
+.facts dd{margin:0;min-width:0;max-width:60ch}
+@media (max-width:520px){.facts > div{grid-template-columns:1fr;gap:4px}}
+.landed{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.landed li{display:grid;grid-template-columns:22px 1fr;gap:10px;background:var(--sage-soft);border-radius:6px;padding:12px 16px}
+.landed li::before{content:"✓";color:var(--sage);font-weight:700}
+
+/* list w/ markers */
+.points{display:grid;gap:18px;padding:0;margin:0;list-style:none}
+.points li{display:grid;grid-template-columns:28px 1fr;gap:12px}
+.points li::before{content:"";width:10px;height:10px;margin-top:.55em;border-radius:50%;background:var(--beet)}
+.points li > div{display:grid;gap:4px;min-width:0}
+
+/* design cards */
+.design{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.dcard{background:var(--sage-soft);border-radius:6px;padding:20px;display:grid;gap:8px;align-content:start;min-width:0}
+.dcard .tag{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--sage)}
+.dcard p{font-size:.97rem}
+.mantra{font-family:var(--display);font-size:1.05rem;color:var(--ink);border-left:2px solid var(--sage);padding-left:12px;margin-top:4px}
+
+/* ladder */
+.ladder{display:grid;gap:10px}
+.rung{display:grid;grid-template-columns:minmax(120px,170px) 1fr;gap:18px;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:18px 20px}
+.rung .lvl{display:grid;gap:2px;align-content:start}
+.rung .lvl b{font-family:var(--display);font-weight:400;font-size:1.2rem}
+.rung .lvl small{font-family:var(--mono);font-size:.8rem;color:var(--beet);font-variant-numeric:tabular-nums}
+.rung .what{display:grid;gap:6px;min-width:0;font-size:.97rem}
+.rung.door{background:var(--beet-soft);border-color:transparent}
+.move{font-size:.88rem;color:var(--sage);font-weight:600}
+.inc{margin:2px 0 0;padding-left:18px;display:grid;gap:4px;font-size:.93rem}
+.path{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.path .step{display:grid;gap:4px;align-content:start;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px 16px;min-width:0}
+.path .step:first-child{background:var(--beet-soft);border-color:transparent}
+.path small{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--beet)}
+.path b{font-family:var(--display);font-weight:400;font-size:1.15rem;line-height:1.2}
+.path span{font-size:.9rem;color:var(--muted)}
+.rhythm{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.rhythm > div{display:grid;gap:4px;align-content:start;background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--sage);border-radius:6px;padding:14px 16px;min-width:0}
+.rhythm small{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.rhythm b{font-family:var(--display);font-weight:400;font-size:1.15rem;line-height:1.2}
+.rhythm span{font-size:.9rem;color:var(--muted)}
+.note{font-size:.9rem;color:var(--muted)}
+@media (max-width:560px){.rung{grid-template-columns:1fr;gap:8px}}
+
+/* movements */
+.score{display:grid;gap:18px}
+.mvt{border:1px solid var(--line);border-radius:6px;background:var(--surface);overflow:hidden}
+.mvt header{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 16px;padding:18px 22px;border-bottom:1px solid var(--line)}
+.mvt header .days{font-family:var(--mono);font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.mvt .tempo{font-family:var(--mono);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--beet)}
+.mvt .body{padding:18px 22px 22px;display:grid;gap:16px}
+.weeks{display:grid;gap:12px}
+.wk{display:grid;grid-template-columns:96px 1fr;gap:14px;font-size:.96rem}
+.wk .w{font-family:var(--mono);font-size:.78rem;color:var(--sage);padding-top:3px}
+@media (max-width:520px){.wk{grid-template-columns:1fr;gap:2px}}
+.wk ul{margin:0;padding-left:18px;display:grid;gap:4px}
+.goal{background:var(--sage-soft);border-radius:4px;padding:10px 14px;font-size:.93rem}
+.goal b{font-weight:600}
+
+/* offers */
+.offers{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;align-items:start}
+.offer{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:24px;display:grid;gap:14px;min-width:0}
+.offer.lean{border:2px solid var(--beet)}
+.price{font-family:var(--display);font-size:2.4rem;line-height:1;font-variant-numeric:tabular-nums}
+.price small{font-family:var(--body);font-size:.95rem;color:var(--muted)}
+.offer ul{margin:0;padding-left:18px;display:grid;gap:6px;font-size:.96rem}
+.fit{font-size:.93rem;color:var(--muted);border-top:1px solid var(--line);padding-top:12px}
+.special{background:var(--beet-soft);border-radius:6px;padding:16px 18px;display:grid;gap:10px}
+.special .tag{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--beet)}
+.special .opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px}
+.special .opt{display:grid;gap:2px}
+.special .opt b{font-family:var(--display);font-weight:400;font-size:1.6rem;line-height:1.1;font-variant-numeric:tabular-nums}
+.special .opt small{font-size:.86rem;color:var(--muted)}
+.was{text-decoration:line-through;color:var(--muted);font-size:.9rem}
+.cta{justify-self:start;display:inline-block;background:var(--beet);color:var(--surface);text-decoration:none;font-weight:600;padding:11px 18px;border-radius:999px;font-size:.95rem}
+.cta:hover{filter:brightness(1.08)}
+.cta:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.freejoin{background:var(--sage-soft);border-radius:8px;padding:20px 22px;display:grid;gap:10px}
+.freejoin .cta{background:var(--sage)}
+.badge{justify-self:start;font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;background:var(--beet);color:var(--surface);padding:4px 10px;border-radius:999px}
+
+/* checklist */
+.checks{display:grid;gap:10px}
+.check{display:grid;grid-template-columns:24px 1fr;gap:12px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px 16px;cursor:pointer}
+.check input{width:20px;height:20px;margin-top:3px;accent-color:var(--beet)}
+.check input:focus-visible{outline:2px solid var(--beet);outline-offset:2px}
+.check span{display:grid;gap:2px}
+.check small{color:var(--muted);font-size:.9rem}
+.check:has(input:checked) b{text-decoration:line-through;color:var(--muted)}
+
+.contact{display:flex;flex-wrap:wrap;gap:10px 24px;font-family:var(--mono);font-size:.9rem}
+.contact span{user-select:all}
+.sign{font-family:var(--display);font-size:1.6rem}
+@media (prefers-reduced-motion:no-preference){ .check{transition:background .2s} .check:hover{background:var(--sage-soft)} }
+
+/* sidebar layout */
+.layout{display:grid;grid-template-columns:230px minmax(0,1fr);gap:56px;max-width:1120px;margin:0 auto;padding-inline:20px;padding-block:40px 80px}
+.side{position:sticky;top:calc(env(safe-area-inset-top,0px) + 32px);align-self:start;display:grid;gap:20px}
+.side .who{display:grid;gap:2px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.side .who b{font-family:var(--display);font-weight:400;font-size:1.35rem;line-height:1.2}
+.side .who small{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.nav{display:grid;gap:2px;list-style:none;margin:0;padding:0}
+.nav button{all:unset;box-sizing:border-box;display:block;width:100%;cursor:pointer;padding:9px 12px;border-radius:4px;font-size:.95rem;color:var(--muted);border-left:2px solid transparent}
+.nav button:hover{color:var(--ink);background:var(--sage-soft)}
+.nav button:focus-visible{outline:2px solid var(--beet);outline-offset:1px}
+.nav button[aria-current="true"]{color:var(--ink);font-weight:600;background:var(--beet-soft);border-left-color:var(--beet)}
+.main{min-width:0;max-width:760px}
+.main section{border-top:0}
+.main .hero + section,.main .signoff{border-top:1px solid var(--line)}
+.pager{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding-top:28px;border-top:1px solid var(--line)}
+.pager button{all:unset;box-sizing:border-box;cursor:pointer;display:grid;gap:2px;padding:12px 16px;border:1px solid var(--line);border-radius:6px;background:var(--surface);min-width:0}
+.pager button:hover{border-color:var(--beet)}
+.pager button:focus-visible{outline:2px solid var(--beet);outline-offset:2px}
+.pager small{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.pager span{font-family:var(--display);font-size:1.1rem}
+.pager .next{margin-left:auto;text-align:right}
+@media (max-width:860px){
+  .layout{grid-template-columns:minmax(0,1fr);gap:8px;padding-block:0 64px}
+  .side{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);margin-inline:-20px;padding:12px 20px;border-bottom:1px solid var(--line);gap:8px}
+  .side .who{display:none}
+  .nav{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+  .nav button{white-space:nowrap;width:auto;border-left:0;border-radius:999px;padding:7px 14px;font-size:.88rem}
+  .main{padding-top:24px}
+}
+</style>
+</head>
+<body>
+
+<div class="layout">
+<aside class="side">
+  <div class="who"><small>Prepared for</small><b>Linda Mench</b><small>Symphony Nutrition</small></div>
+  <nav aria-label="Sections"><ul class="nav">
+    <li><button type="button" data-go="overview">Call summary</button></li>
+    <li><button type="button" data-go="seeing">What I'm seeing</button></li>
+    <li><button type="button" data-go="design">Your design</button></li>
+    <li><button type="button" data-go="ecosystem">Niche &amp; ecosystem</button></li>
+    <li><button type="button" data-go="plan">90-day plan</button></li>
+    <li><button type="button" data-go="offers">Working together</button></li>
+    <li><button type="button" data-go="next">Next steps</button></li>
+  </ul></nav>
+</aside>
+<main class="main" id="top">
+
+<header class="hero" data-panel="overview">
+  <div class="eyebrow">Strategy Audit Call · Recap &amp; Roadmap</div>
+  <h1>Linda, this is where all of you finally gets a home.</h1>
+  <p class="lede">You came into our call overwhelmed and a little scattered after reading your Business Alignment Blueprint. That makes complete sense. Here's everything we covered, what I'm seeing, and a 90-day plan built for the way you're actually designed to work.</p>
+  <div class="meta"><span>Prepared for Linda Mench · Symphony Nutrition</span><span>By Aurailia</span><span>October 2026</span></div>
+</header>
+
+<section data-panel="overview">
+  <div class="eyebrow">Call summary</div>
+  <h2>Where you are today</h2>
+  <dl class="facts">
+    <div><dt>Your practice</dt><dd>Symphony Nutrition. One-on-one clients, men and women of all ages, mostly digestive health. The work you love, and the results show it.</dd></div>
+    <div><dt>Your group</dt><dd>Seven founding women at $59 a month, two live calls a month, recordings in Practice Better. Nobody new has joined at $79, even with it as your newsletter call to action.</dd></div>
+    <div><dt>Your program</dt><dd>Your menopause program is recorded but never fully launched, because you weren't sold on it yourself. You're reworking it now, the public pages are hidden, and there's a trademark question on the name.</dd></div>
+    <div><dt>Your week</dt><dd>Three jobs: nutrition, the piano studio, and church work.</dd></div>
+    <div><dt>Your vision</dt><dd>About 15 one-on-one clients over three days, group coaching on the other days, and the freedom to travel with your husband and work from anywhere.</dd></div>
+  </dl>
+</section>
+
+<section data-panel="overview">
+  <div class="eyebrow">What we talked about</div>
+  <h2>The ground we covered</h2>
+  <ul class="points">
+    <li><div><h3>Why the blueprint felt overwhelming</h3><p>You read it all and felt scattered. As a Manifesting Generator with many passions, that's normal. The answer isn't choosing one passion. It's giving them all one doorway in.</p></div></li>
+    <li><div><h3>Why the $79 group isn't moving</h3><p>Women join a membership for one specific thing they want right now, like a course, a challenge or a process. "A little of everything" doesn't give her a reason to say yes.</p></div></li>
+    <li><div><h3>Building a home on Skool</h3><p>I walked you through my own community: free, premium and VIP tiers, classrooms, the calendar, and how easy upgrading is. You'd looked at Mighty and Circle and weren't connecting with either.</p></div></li>
+    <li><div><h3>Turning what you've already written into something she experiences</h3><p>Your blogs and newsletters can become a 21-day challenge and interactive tools with recipes and simple daily rituals, like the Vitality Rituals example I showed you. Newsletters then share a snippet and send her inside to read more.</p></div></li>
+    <li><div><h3>Launching before it's perfect</h3><p>You asked whether to release your HRT module on its own while the bigger program comes together. Yes. I shared how I built From Chaos to Cash Flow live, two weeks ahead, with members' feedback shaping it.</p></div></li>
+    <li><div><h3>Your design in your business</h3><p>Sleeping on decisions, protecting your hermit time, and remembering that most doubt you feel isn't yours.</p></div></li>
+    <li><div><h3>Zach</h3><p>You'd like to gift your son a Business Alignment Blueprint for his online fitness business.</p></div></li>
+  </ul>
+</section>
+
+<section data-panel="overview">
+  <div class="eyebrow">What we landed on</div>
+  <h2>Decisions from the call</h2>
+  <ul class="landed">
+    <li>Your doorway is women in perimenopause and menopause who want to live fully and wake up excited about life again.</li>
+    <li>Move forward with the HRT module now instead of waiting for the full program.</li>
+    <li>Build the community slowly: Start Here and one challenge first, then ask members what they want next.</li>
+    <li>Open the free level to a founding group of women first, then charge a small monthly fee.</li>
+    <li>I send you options for working together. That's this page.</li>
+    <li>You gift Zach his blueprint, and I send him the welcome email.</li>
+  </ul>
+</section>
+
+<section data-panel="seeing">
+  <div class="eyebrow">What I'm seeing</div>
+  <h2>You don't need more content. You need a container.</h2>
+  <ul class="points">
+    <li><div><h3>There's no doorway in yet</h3><p>Your nutrition practice serves everyone, men and women of every age. Your menopause work serves women in transition. When someone lands on your world, they can't tell which door is theirs. The doorway we landed on: <strong>women in perimenopause and menopause who want to wake up excited about life again</strong>. Nutrition, digestion, HRT, purpose, all of it lives inside once she's in.</p></div></li>
+    <li><div><h3>Your best free stuff is leaking out the side</h3><p>You give away a lot in your newsletter and blog. Yogurt and probiotics for longevity. Building and keeping muscle mass. Great content, and it disappears into inboxes and spam folders. Nobody gets to experience you, so nobody moves closer.</p></div></li>
+    <li><div><h3>The membership has no specific reason to join</h3><p>Women don't join a group because it offers "a bit of everything." They join because there's one thing inside they want right now. A course, a challenge, a process. That's the missing piece behind the $79 crickets, not your price and not your value.</p></div></li>
+    <li><div><h3>One-on-one has a ceiling</h3><p>Fifteen clients a week across three days is a beautiful life. It's also a cap on income, and every client who finishes means going back out to replace them. Recurring community income is what lets you take a month off and still get paid.</p></div></li>
+  </ul>
+</section>
+
+<section data-panel="design">
+  <div class="eyebrow">Your Human Design in this</div>
+  <h2>Why this plan is shaped the way it is</h2>
+  <p>You cried reading your blueprint. That tells me it landed. Here's how your design shows up in this exact season of your business.</p>
+  <div class="design">
+    <div class="dcard"><div class="tag">Manifesting Generator</div><h3>Many passions, one hallway</h3><p>You're built to do many things. Picking one doesn't kill the others. The doorway gets her in, and the community holds everything else you love. You're also not meant to finish every project. When the excitement leaves, you're allowed to let it go.</p><p class="mantra">If it doesn't light me up, it's a no.</p></div>
+    <div class="dcard"><div class="tag">Emotional Authority</div><h3>Sleep on it</h3><p>Your truth is never in the moment. A big yes on Tuesday can be a "what did I do" on Wednesday. Every major decision in this plan has a built-in pause. Use it, including when you decide how we work together.</p><p class="mantra">I sleep on it. If I'm still excited tomorrow, it's a full-body yes.</p></div>
+    <div class="dcard"><div class="tag">Line 2 · The Hermit</div><h3>Protect your creative space</h3><p>You need real, uninterrupted time alone to create. The community runs on your rhythm, once a week or twice a week, whatever feels good. You don't have to be "on" every day to make this work.</p><p class="mantra">I show up when I'm full, not when I'm empty.</p></div>
+    <div class="dcard"><div class="tag">Open G, Heart &amp; Spleen</div><h3>Most of the doubt isn't yours</h3><p>You absorb other people's fears, doubts and identity confusion and feel them as your own, louder. You already know this from that client last year you carried for months. Before calls, set the intention that what isn't yours bounces off.</p><p class="mantra">This is not mine. I send it back with love.</p></div>
+    <div class="dcard"><div class="tag">Respond, then build</div><h3>Ask before you create</h3><p>Creating is fun. You said it yourself, it would be easy to stay there. As a Generator you're designed to respond. So we put things out early and let the community tell you what to build next, instead of spending 2,000 hours on something nobody asked for.</p><p class="mantra">I build what they ask for.</p></div>
+  </div>
+</section>
+
+<section data-panel="ecosystem">
+  <div class="eyebrow">Your niche &amp; focus</div>
+  <h2>Who you help, and how</h2>
+  <p class="lede">You help women in perimenopause and menopause feel at home in their bodies again through nutrition and a balanced way of living. They come to you for the food and the habits. They stay because they learn to be present, live fully and love their life through the transition.</p>
+  <dl class="facts">
+    <div><dt>Who she is</dt><dd>A woman in her 40s or 50s in the middle of the transition. She's eating the same as always and the weight keeps coming. Her face swells, her clothes don't fit, and she avoids the mirror. She's been told to "get on HRT" and has more questions than answers.</dd></div>
+    <div><dt>What you help with</dt><dd>Nutrition and digestion for the midlife body, building and keeping muscle, gut health, HRT questions and how to talk to your doctor about it, and the daily habits that bring her energy back.</dd></div>
+    <div><dt>How you help</dt><dd>You look at the whole woman, not just her plate. Simple daily practices, real information she can use, live support in a community, and one-on-one work when she needs a plan built for her body.</dd></div>
+    <div><dt>What she gets beyond nutrition</dt><dd>She comes in for nutrition and a more balanced life, and she leaves with more than that. She learns to slow down and be present in her own life, to live it to the fullest, and to love this season instead of just getting through it. The transition stops being something that happens to her and becomes a time she gets to enjoy.</dd></div>
+    <div><dt>Why you</dt><dd>You're living it right now, HRT, patch shortages and all. You're a clinical nutrition specialist who solves the hard digestive cases other people gave up on. You bring the science and the lived experience.</dd></div>
+  </dl>
+</section>
+
+<section data-panel="ecosystem">
+  <div class="eyebrow">Why she joins</div>
+  <h2>The reason she says yes</h2>
+  <p>She doesn't join because you offer "nutrition, menopause and wellness." She joins because one thing in there speaks to exactly where she is today.</p>
+  <div class="quotes">
+    <div class="quote"><q>I'm eating the same and still gaining.</q><span>Your 21-day challenge gives her daily practices and best habits she can start today, free.</span></div>
+    <div class="quote"><q>I have no idea what to ask my doctor about HRT.</q><span>Your HRT module answers her questions and walks her into that appointment prepared.</span></div>
+    <div class="quote"><q>I want to feel like myself again.</q><span>A community of women going through the same thing, with you guiding them.</span></div>
+  </div>
+  <p>Once she's inside and feeling better, she trusts you. That's when the deeper work lands: presence, living fully, and learning to love life during the transition. Everything else you love to teach has a place too, because it all connects to the same woman.</p>
+</section>
+
+<section data-panel="ecosystem">
+  <div class="eyebrow">Your ecosystem</div>
+  <h2>How she moves from "who is she?" to working with you</h2>
+  <p>Each level gives her a real result and a clear reason to take the next step.</p>
+  <div class="ladder">
+    <div class="rung door"><div class="lvl"><b>The doorway</b><small>Social · newsletter · blog</small></div><div class="what"><p>A post, a newsletter snippet, a blog teaser on a problem she's living with. "I go much deeper on this inside the community." One clear place to send her.</p><p class="move">Moves her up: she wants the rest of the answer.</p></div></div>
+    <div class="rung"><div class="lvl"><b>Free</b><small>Founding group · then $7/mo</small></div><div class="what"><p><strong>Start Here</strong>, your <strong>21-day challenge</strong> and a library of freebies. The challenge can run live with you or be self-paced: daily practices and best habits drawn from what you already teach, each with the why behind it.</p><p class="move">Moves her up: she feels the difference in 21 days and wants answers to her bigger questions.</p></div></div>
+    <div class="rung"><div class="lvl"><b>Premium</b><small>$17–$27/mo</small></div><div class="what"><p>Your <strong>HRT module</strong> is the first classroom. Each additional module of your program is added as its own classroom over time. A monthly live Q&amp;A, plus a new workshop, lesson or practice every month. The HRT module can also be bought on its own as a one-time purchase.</p><p class="move">Moves her up: she's learning a lot and wants you to walk her through it.</p></div></div>
+    <div class="rung"><div class="lvl"><b>VIP</b><small>$111–$222/mo</small></div><div class="what"><p>The <strong>full program</strong>, with you walking a small group through it live. Deeper work, closer support, and women going through it together. Your seven founding women belong here first.</p><ul class="inc"><li>A monthly one-on-one Zoom call, 30 minutes or an hour, to keep her on track and give her the plan for the month ahead</li><li>Her own VIP client portal with that month's plan to follow</li><li>Group calls once or twice a month with the other VIP women</li></ul><p class="move">Moves her up: she has specific things in her body she wants solved.</p></div></div>
+    <div class="rung"><div class="lvl"><b>One-on-one</b><small>Raised rates</small></div><div class="what"><p>A plan built for her body and her history. Because the community holds the information, your private time becomes premium, and you keep it to 10 to 15 clients a week over three days.</p></div></div>
+  </div>
+</section>
+
+<section data-panel="ecosystem">
+  <div class="eyebrow">Your current clients</div>
+  <h2>A second doorway: the women already working with you</h2>
+  <p>Your one-on-one clients already trust you. The community gives them support between sessions and somewhere to go when their sessions end, so they stay with you instead of drifting off.</p>
+  <div class="path">
+    <div class="step"><small>Today</small><b>One-on-one client</b><span>She came to you for a specific problem and is getting results in her sessions.</span></div>
+    <div class="step"><small>Invite</small><b>Free community</b><span>Extra support between sessions: the challenge, your freebies, and women going through the same thing.</span></div>
+    <div class="step"><small>Upgrade</small><b>Premium</b><span>Group-level support with the monthly live Q&amp;A, the HRT module and your growing library.</span></div>
+    <div class="step"><small>Upgrade</small><b>VIP</b><span>Personal support beyond the sessions she came for: a monthly one-on-one Zoom, her VIP portal with the month's plan, and group calls once or twice a month.</span></div>
+  </div>
+  <p>This is how one-on-one stops being a revolving door. When her sessions finish, she doesn't leave. She steps into VIP and keeps paying you monthly for the support she still wants.</p>
+</section>
+
+<section data-panel="ecosystem">
+  <div class="eyebrow">Your monthly rhythm</div>
+  <h2>One new piece a month builds your library</h2>
+  <p>You don't build everything up front. Each month you add one new workshop, lesson or practice. A year from now you have a full library of information and practices women can come back to, and every new piece is a fresh reason to post, invite and upgrade.</p>
+  <div class="rhythm">
+    <div><small>Month 1</small><b>HRT module</b><span>Your questions answered, and how to talk to your doctor</span></div>
+    <div><small>Month 2</small><b>Gut health workshop</b><span>Digestion in the midlife body</span></div>
+    <div><small>Month 3</small><b>Muscle practice</b><span>Building and keeping muscle mass</span></div>
+    <div><small>Month 4</small><b>Probiotics lesson</b><span>Yogurt and probiotics for longevity</span></div>
+  </div>
+  <p class="note">Examples pulled from topics you already write about. Let the community tell you what comes next.</p>
+</section>
+
+<section data-panel="plan">
+  <div class="eyebrow">Your 90-day plan</div>
+  <h2>Three movements</h2>
+  <p>Built slow on purpose. You don't build everything at once. You open the doors, listen, and add.</p>
+  <div class="score">
+
+    <article class="mvt">
+      <header><div class="stack" style="gap:2px"><span class="tempo">Movement I · Lay the foundation</span><h3>Open the doors</h3></div><span class="days">Days 1–30 · Oct 12 – Nov 10</span></header>
+      <div class="body">
+        <div class="weeks">
+          <div class="wk"><span class="w">Week 1</span><ul><li>Sleep on how you want to build this, then decide (see the two options below).</li><li>Confirm where the trademark stands before naming anything. We don't put a name on the community you might lose.</li><li>Gather everything you already have: blog posts, newsletters, recorded workshops, audios.</li></ul></div>
+          <div class="wk"><span class="w">Week 2</span><ul><li>Set up your Skool community with the doorway message front and center.</li><li>Build Start Here: welcome, what happens here, where to find things.</li></ul></div>
+          <div class="wk"><span class="w">Weeks 3–4</span><ul><li>Create your 21-day challenge: daily practices and best habits drawn from what you already teach, each with the why behind it. Decide whether you'll run it live or set it up self-paced.</li><li>Pull your HRT module out as its own small offer. Two videos: your questions answered, and how to talk to your doctor. Release it as-is. Done beats perfect.</li></ul></div>
+        </div>
+        <div class="goal"><b>By day 30:</b> a free community that's live, with Start Here and one challenge inside. Nothing more.</div>
+      </div>
+    </article>
+
+    <article class="mvt">
+      <header><div class="stack" style="gap:2px"><span class="tempo">Movement II · Invite &amp; listen</span><h3>Fill the room</h3></div><span class="days">Days 31–60 · Nov 11 – Dec 10</span></header>
+      <div class="body">
+        <div class="weeks">
+          <div class="wk"><span class="w">Week 5</span><ul><li>Open the founding 50: free for the first 50 women, $7 a month after that.</li><li>Change your newsletter call to action. Share a snippet, then "finish reading inside."</li></ul></div>
+          <div class="wk"><span class="w">Week 6</span><ul><li>Kick off the first 21-day challenge, live with whoever's in or self-paced. Post on your rhythm, one to two times a week is plenty.</li></ul></div>
+          <div class="wk"><span class="w">Weeks 7–8</span><ul><li>Ask the community: "What do you want me to create next?" Wait for the response before you build anything.</li><li>Open Premium with the HRT module as its first classroom and your first monthly live Q&amp;A on the calendar.</li><li>Start your monthly rhythm: one new workshop, lesson or practice added each month.</li></ul></div>
+        </div>
+        <div class="goal"><b>By day 60:</b> women coming in through one doorway, the first upgrades to Premium, and a list of what they're asking you for.</div>
+      </div>
+    </article>
+
+    <article class="mvt">
+      <header><div class="stack" style="gap:2px"><span class="tempo">Movement III · Recurring income</span><h3>Build the top tier</h3></div><span class="days">Days 61–90 · Dec 11 – Jan 9</span></header>
+      <div class="body">
+        <div class="weeks">
+          <div class="wk"><span class="w">Week 9</span><ul><li>Design your VIP tier around the full program, walked through live, shaped by what the community told you they want.</li><li>Add the next module of your program to Premium as its own classroom.</li><li>Personally invite your seven founding women in first. They've earned it.</li><li>Invite your current one-on-one clients into the community, with Premium or VIP for support between and after their sessions.</li></ul></div>
+          <div class="wk"><span class="w">Week 10</span><ul><li>December is light on purpose. Enjoy the holidays and travel. Let the challenge and classrooms work for you.</li></ul></div>
+          <div class="wk"><span class="w">Weeks 11–13</span><ul><li>Open VIP to the community in January, when women are ready for a fresh start.</li><li>Set your new one-on-one rate and the three days a week you'll see clients.</li><li>Look at the numbers together and sleep on what's next.</li></ul></div>
+        </div>
+        <div class="goal"><b>By day 90:</b> all four levels live, recurring monthly income started, and a clear path off the three-job treadmill.</div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<section data-panel="offers">
+  <div class="eyebrow">How we can work together</div>
+  <h2>Two ways forward</h2>
+  <p>You can build it yourself with me beside you, or hand me your content and I build it for you. Both get you to the same place. The difference is whose hands are on the keyboard.</p>
+  <div class="offers">
+    <div class="offer">
+      <h3>VIP in Embody Wealth</h3>
+      <div class="price">$222<small> /month</small></div>
+      <p>You build. I keep you clear, focused and accountable.</p>
+      <div class="special">
+        <span class="tag">This weekend only · ends Sunday, Oct 11</span>
+        <div class="opts">
+          <div class="opt"><span class="was">$222/mo</span><b>$147<small> /mo</small></b><small>Monthly VIP</small></div>
+          <div class="opt"><span class="was">$2,664/yr</span><b>$1,111</b><small>Full year, plus 4 Mindscaping sessions with me</small></div>
+        </div>
+      </div>
+      <ul>
+        <li>A monthly one-on-one call to plan your month and stay accountable</li>
+        <li>Daily Voxer support for ideas, questions and "am I doing this right?"</li>
+        <li>My eyes on your Skool community, with feedback on what to change</li>
+        <li>A custom interactive artifact built for you, as a freebie or low-ticket offer</li>
+      </ul>
+      <p class="fit">Best if you want to learn the system, enjoy building, and have the hours to do it.</p>
+      <a class="cta" href="https://www.skool.com/embody-wealth/plans" target="_blank" rel="noopener">Upgrade to VIP</a>
+    </div>
+    <div class="offer lean">
+      <span class="badge">Done for you</span>
+      <h3>Skool Community Build</h3>
+      <div class="price">$1,777</div>
+      <p>You hand me your content. I build your entire community.</p>
+      <ul>
+        <li>Your About page and home page banner</li>
+        <li>Free classrooms: Start Here, a 21-day challenge or 7-day restart, and a freebie library</li>
+        <li>Premium classrooms built from your existing audios, workshops and videos (you send them ready to go, no editing needed)</li>
+        <li>Your full tier structure, including the VIP tier planned out for recurring monthly income</li>
+        <li>Three months of bi-weekly calls with me</li>
+        <li>Daily support for those three months</li>
+      </ul>
+      <p class="fit">Best if your time is already split between nutrition, piano and church, and you want this live without becoming a tech project. Your VA gets a finished community to maintain instead of one to figure out.</p>
+    </div>
+  </div>
+  <div class="freejoin">
+    <h3>Not sure yet? Come feel it first.</h3>
+    <p>Join Embody Wealth for free and see what a Skool community feels like from the inside. Walk through the classrooms, the calendar, the way members show up for each other. It's the exact kind of space we'd build for you. When you're ready, you can upgrade to VIP right from there.</p>
+    <a class="cta" href="https://www.skool.com/embody-wealth/plans" target="_blank" rel="noopener">Join Embody Wealth free</a>
+  </div>
+  <p>Remember your authority. Sleep on it. If you still feel the excitement tomorrow, that's your answer. The VIP weekend pricing gives you exactly that: sleep on it tonight, decide by Sunday.</p>
+</section>
+
+<section data-panel="next">
+  <div class="eyebrow">Your next steps</div>
+  <h2>This week</h2>
+  <div class="checks">
+    <label class="check" for="c0"><input type="checkbox" id="c0"><span><b>Join Embody Wealth for free</b><small>Look around and feel the community from the inside: skool.com/embody-wealth</small></span></label>
+    <label class="check" for="c1"><input type="checkbox" id="c1"><span><b>Sleep on the two options</b><small>VIP weekend pricing ($147/mo or $1,111/yr with 4 Mindscaping sessions) ends Sunday. Then tell me which one feels like a full-body yes.</small></span></label>
+    <label class="check" for="c2"><input type="checkbox" id="c2"><span><b>Gift Zach his blueprint</b><small>Purchase it, then email me his name and email. I'll send him a gift note with everything he needs.</small></span></label>
+    <label class="check" for="c3"><input type="checkbox" id="c3"><span><b>Gather what you already have</b><small>Blog posts, newsletters, your HRT recordings, any workshops or audios. One folder is perfect.</small></span></label>
+    <label class="check" for="c4"><input type="checkbox" id="c4"><span><b>Check on the trademark</b><small>So we know what name the community can carry long-term.</small></span></label>
+    <label class="check" for="c5"><input type="checkbox" id="c5"><span><b>When the doubt shows up, check whose it is</b><small>Open centers. Most of it isn't yours. Send it back with love.</small></span></label>
+  </div>
+</section>
+
+<section data-panel="next" class="signoff">
+  <p>You have so much women in this season genuinely need. All of it finally gets a place to live, and you get your time back. I'm excited for you.</p>
+  <div class="sign">Aurailia</div>
+  <div class="contact"><span>team@aurailia.com</span><span>818-468-1210</span></div>
+</section>
+
+<div class="pager">
+  <button type="button" class="prev" id="prevBtn"><small>Previous</small><span></span></button>
+  <button type="button" class="next" id="nextBtn"><small>Next</small><span></span></button>
+</div>
+
+</main>
+</div>
+
+<script>
+(function(){
+  var navBtns=[].slice.call(document.querySelectorAll('.nav button'));
+  var order=navBtns.map(function(b){return b.dataset.go});
+  var names={}; navBtns.forEach(function(b){names[b.dataset.go]=b.textContent});
+  var panels=[].slice.call(document.querySelectorAll('[data-panel]'));
+  var prev=document.getElementById('prevBtn'), next=document.getElementById('nextBtn');
+  function show(id, scroll){
+    if(order.indexOf(id)<0) id=order[0];
+    panels.forEach(function(p){p.hidden=p.dataset.panel!==id});
+    navBtns.forEach(function(b){b.setAttribute('aria-current', b.dataset.go===id?'true':'false')});
+    var i=order.indexOf(id);
+    prev.hidden=i===0; next.hidden=i===order.length-1;
+    if(i>0){prev.dataset.go=order[i-1]; prev.querySelector('span').textContent=names[order[i-1]];}
+    if(i<order.length-1){next.dataset.go=order[i+1]; next.querySelector('span').textContent=names[order[i+1]];}
+    var active=navBtns[i]; if(active && active.scrollIntoView && window.innerWidth<=860){ try{active.scrollIntoView({block:'nearest',inline:'center'})}catch(e){} }
+    try{ history.replaceState(null,'','#'+id) }catch(e){}
+    if(scroll) window.scrollTo({top:0,behavior:'auto'});
+  }
+  navBtns.forEach(function(b){b.addEventListener('click',function(){show(b.dataset.go,true)})});
+  [prev,next].forEach(function(b){b.addEventListener('click',function(){show(b.dataset.go,true)})});
+  show((location.hash||'').slice(1), false);
+})();
+document.querySelectorAll('.check input').forEach(function(cb){
+  try{ if(localStorage.getItem('lr-'+cb.id)==='1') cb.checked=true; }catch(e){}
+  cb.addEventListener('change',function(){ try{ localStorage.setItem('lr-'+cb.id, cb.checked?'1':'0'); }catch(e){} });
+});
+</script>
+</body>
+</html>
